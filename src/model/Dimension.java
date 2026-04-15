@@ -6,16 +6,14 @@ public class Dimension {
 
     // Private fields
     private String name;
-    private String isoCode;
     private int weight;
 
     private ArrayList<Metric> metrics;
 
 
     // Constructor
-    public Dimension(String name, String isoCode, int weight) {
+    public Dimension(String name, int weight) {
         this.name = name;
-        this.isoCode = isoCode;
         this.weight = weight;
 
         this.metrics = new ArrayList<>();
@@ -23,7 +21,6 @@ public class Dimension {
 
     // Getters
     public String getName() { return name; }
-    public String getIsoCode() { return isoCode; }
     public int getWeight() { return weight; }
     public ArrayList<Metric> getMetrics() { return this.metrics; }
 
