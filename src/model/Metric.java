@@ -13,7 +13,7 @@ public class Metric {
     private double measuredValue;
 
     // Constructor
-    Metric(String name, int weight, String direction, double minValue, double maxValue, String unit) {
+    public Metric(String name, int weight, String direction, double minValue, double maxValue, String unit) {
         this.name = name;
         this.weight = weight;
         this.direction = direction;
