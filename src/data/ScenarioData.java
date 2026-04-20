@@ -31,14 +31,71 @@ public class ScenarioData {
     // Create Education Mode
     private static Mode createEducationMode() {
         Mode educationMode = new Mode("Education");
-        educationMode.addScenario(createTeamAhphaScenario());
+        educationMode.addScenario(createTeamAlphaScenario());
         educationMode.addScenario(createTeamBetaScenario());
 
         return educationMode;
     }
 
-    private static Scenario createTeamAhphaScenario() {
-        return null;
+    private static Scenario createTeamAlphaScenario() {
+        Scenario teamAlpha = new Scenario("Team Alpha");
+
+        // Create Usability Dimension
+        Dimension usability = new Dimension("Usability", 25);
+        // Add metrics for Usability
+        Metric susScore = new Metric("SUS score", 50, "higher", 0, 100, "points");
+        Metric onboardingTime = new Metric("Onboarding time", 50, "lower", 0, 60, "min");
+
+        usability.addMetric(susScore);
+        usability.addMetric(onboardingTime);
+        teamAlpha.addDimension(usability);
+
+
+        // Create Perf. Efficiency Dimension
+        Dimension perfEfficiency = new Dimension("Perf. Efficiency", 20);
+        // Add metrics for Perf. Efficiency
+        Metric videoStartTime = new Metric("Video start time", 50, "lower", 0, 15, "sec");
+        Metric concurrentExams = new Metric("Concurrent exams", 50, "higher", 0, 600, "users");
+
+        perfEfficiency.addMetric(videoStartTime);
+        perfEfficiency.addMetric(concurrentExams);
+        teamAlpha.addDimension(perfEfficiency);
+
+
+        // Create Accessibility Dimension
+        Dimension accessibility = new Dimension("Accessibility", 20);
+        // Add metrics for Accessibility
+        Metric WCAG_Compliance = new Metric("WCAG compliance", 50, "higher", 0, 100, "%");
+        Metric screenReaderScore = new Metric("Screen reader score", 50, "higher", 0, 100, "%");
+
+        accessibility.addMetric(WCAG_Compliance);
+        accessibility.addMetric(screenReaderScore);
+        teamAlpha.addDimension(accessibility);
+
+
+        // Create Reliability Dimension
+        Dimension reliability = new Dimension("Reliability", 20);
+        // Add metrics for Reliability
+        Metric uptime = new Metric("Uptime", 50, "higher", 95, 100, "%");
+        Metric mttr = new Metric("MTTR", 50, "lower", 0, 120, "min");
+
+        reliability.addMetric(uptime);
+        reliability.addMetric(mttr);
+        teamAlpha.addDimension(reliability);
+
+
+        // Create Func. Suitability Dimension
+        Dimension funcSuitability = new Dimension("Func. Suitability", 15);
+        // Add metrics for Func. Suitability
+        Metric featureCompletion = new Metric("Feature completion", 50, "higher", 0, 100, "%");
+        Metric assignmentSubmitRate = new Metric("Assignment submit rate", 50, "higher", 0, 100, "%");
+
+        funcSuitability.addMetric(featureCompletion);
+        funcSuitability.addMetric(assignmentSubmitRate);
+        teamAlpha.addDimension(funcSuitability);
+
+
+        return teamAlpha;
     }
 
     private static Scenario createTeamBetaScenario() {
