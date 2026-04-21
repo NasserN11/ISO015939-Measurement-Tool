@@ -1,16 +1,18 @@
 package GUI;
 
 import com.sun.tools.javac.Main;
+import controller.WizardController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
 
+
+    // Private fields
     private CardLayout cardLayout;
     private JPanel mainPanel;
-
-    private int currentStep = 0; // 0=profile, 1=define, 2=plan, 3=collect, 4=analyse
+    private WizardController controller;
 
     public MainFrame() {
         // Set up the window
@@ -28,6 +30,8 @@ public class MainFrame extends JFrame {
         // Create CardLayout and the panel that holds all screens
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
+
+        controller = new WizardController(this, cardLayout, mainPanel);
 
         // Create panels
         JPanel profilePanel = new JPanel();
@@ -54,18 +58,8 @@ public class MainFrame extends JFrame {
         JButton backButton = new JButton("Back");
         JButton nextButton = new JButton("Next");
 
-        nextButton.addActionListener(e -> {
-            if (currentStep < 4) {
-                currentStep++;
-                cardLayout.next(mainPanel);
-            }
-        });
-        backButton.addActionListener(e -> {
-            if (currentStep > 0) {
-                currentStep--;
-                cardLayout.previous(mainPanel);
-            }
-        });
+        nextButton.addActionListener(e -> controller.nextStep());
+        backButton.addActionListener(e -> controller.previousStep());
 
         buttonPanel.add(backButton);
         buttonPanel.add(nextButton);
