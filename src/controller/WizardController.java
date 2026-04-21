@@ -19,7 +19,7 @@ public class WizardController {
     private String selectedMode;
 
     // Constructor
-    public WizardController(mainFrame, cardLayout, mainPanel) {
+    public WizardController(MainFrame mainFrame,CardLayout cardLayout,JPanel mainPanel) {
         this.mainFrame = mainFrame;
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;

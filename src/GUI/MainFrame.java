@@ -2,7 +2,6 @@ package GUI;
 
 import com.sun.tools.javac.Main;
 import controller.WizardController;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -34,8 +33,7 @@ public class MainFrame extends JFrame {
         controller = new WizardController(this, cardLayout, mainPanel);
 
         // Create panels
-        JPanel profilePanel = new JPanel();
-        profilePanel.add(new JLabel("Step 1"));
+        ProfilePanel profilePanel = new ProfilePanel();
         JPanel definePanel = new JPanel();
         definePanel.add(new JLabel("Step 2"));
         JPanel planPanel = new JPanel();
