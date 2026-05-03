@@ -1,6 +1,8 @@
 package controller;
 
+import GUI.DefinePanel;
 import GUI.MainFrame;
+import GUI.ProfilePanel;
 import model.Scenario;
 import model.UserProfile;
 
@@ -17,6 +19,8 @@ public class WizardController {
     private UserProfile userProfile;
     private Scenario selectedScenario;
     private String selectedMode;
+    private ProfilePanel profilePanel;
+    private DefinePanel definePanel;
 
     // Constructor
     public WizardController(MainFrame mainFrame,CardLayout cardLayout,JPanel mainPanel) {
@@ -29,15 +33,31 @@ public class WizardController {
 
     // Methods
     public void nextStep() {
+        // Validate current step before moving
+        if (currentStep == 0 && profilePanel != null) {
+            if (!profilePanel.dataIsValid()) {
+                JOptionPane.showMessageDialog(mainFrame,
+                        "Please fill in all fields before continuing.",
+                        "Validation Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            profilePanel.saveToController(this);
+        }
+
         if (currentStep < 4) {
             currentStep++;
         }
+
+        showCurrentStep();
     }
 
     public void previousStep() {
         if (currentStep > 0) {
             currentStep--;
         }
+
+        showCurrentStep();
     }
 
     public void saveProfile(String username, String school, String sessionName) {
@@ -46,7 +66,7 @@ public class WizardController {
 
     public void saveSelection(String mode, Scenario scenario) {
         this.selectedMode = mode;
-        this.selectedScenario = selectedScenario;
+        this.selectedScenario = scenario;
     }
 
     public Scenario getCurrentScenario() {
@@ -67,5 +87,9 @@ public class WizardController {
         }
     }
 
+    public void setProfilePanel(ProfilePanel profilePanel) {
+        this.profilePanel = profilePanel;
+    }
 
+    public void setDefinePanel(DefinePanel definePanel) { this.definePanel = definePanel; }
 }
