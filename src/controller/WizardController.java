@@ -2,6 +2,7 @@ package controller;
 
 import GUI.DefinePanel;
 import GUI.MainFrame;
+import GUI.PlanPanel;
 import GUI.ProfilePanel;
 import model.Scenario;
 import model.UserProfile;
@@ -21,6 +22,7 @@ public class WizardController {
     private String selectedMode;
     private ProfilePanel profilePanel;
     private DefinePanel definePanel;
+    private PlanPanel planPanel;
 
     // Constructor
     public WizardController(MainFrame mainFrame,CardLayout cardLayout,JPanel mainPanel) {
@@ -92,4 +94,6 @@ public class WizardController {
     }
 
     public void setDefinePanel(DefinePanel definePanel) { this.definePanel = definePanel; }
+
+    public void setPlanPanel(PlanPanel planPanel) { this.planPanel = planPanel; }
 }

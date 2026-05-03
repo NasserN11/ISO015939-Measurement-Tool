@@ -39,8 +39,8 @@ public class MainFrame extends JFrame {
         DefinePanel definePanel = new DefinePanel();
         controller.setDefinePanel(definePanel);
 
-        JPanel planPanel = new JPanel();
-        planPanel.add(new JLabel("Step 3"));
+        PlanPanel planPanel = new PlanPanel();
+        controller.setPlanPanel(planPanel);
 
         JPanel collectPanel = new JPanel();
         collectPanel.add(new JLabel("Step 4"));
