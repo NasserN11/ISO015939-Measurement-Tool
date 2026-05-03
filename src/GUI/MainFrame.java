@@ -34,12 +34,17 @@ public class MainFrame extends JFrame {
 
         // Create panels
         ProfilePanel profilePanel = new ProfilePanel();
-        JPanel definePanel = new JPanel();
-        definePanel.add(new JLabel("Step 2"));
+        controller.setProfilePanel(profilePanel);
+
+        DefinePanel definePanel = new DefinePanel();
+        controller.setDefinePanel(definePanel);
+
         JPanel planPanel = new JPanel();
         planPanel.add(new JLabel("Step 3"));
+
         JPanel collectPanel = new JPanel();
         collectPanel.add(new JLabel("Step 4"));
+
         JPanel analysePanel = new JPanel();
         analysePanel.add(new JLabel("Step 5"));
 
