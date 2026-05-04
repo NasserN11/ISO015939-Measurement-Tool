@@ -39,8 +39,7 @@ public class PlanPanel extends JPanel {
             for (Metric m : d.getMetrics()) {
                 model.addRow(new Object[]
                                 {
-                                        d.getName(),
-                                        d.getWeight(),
+                                        d.getName() + " (Coefficient: " + d.getWeight() + ")",
                                         m.getName(),
                                         m.getWeight(),
                                         m.getDirection().equals("Higher") ? "Higher is better" : "Lower is better",
