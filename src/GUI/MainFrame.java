@@ -2,8 +2,12 @@ package GUI;
 
 import com.sun.tools.javac.Main;
 import controller.WizardController;
+import data.ScenarioData;
+import model.Mode;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
 
@@ -32,21 +36,29 @@ public class MainFrame extends JFrame {
 
         controller = new WizardController(this, cardLayout, mainPanel);
 
+
+
         // Create panels
         ProfilePanel profilePanel = new ProfilePanel();
         controller.setProfilePanel(profilePanel);
 
+
         DefinePanel definePanel = new DefinePanel();
         controller.setDefinePanel(definePanel);
+
 
         PlanPanel planPanel = new PlanPanel();
         controller.setPlanPanel(planPanel);
 
+
         JPanel collectPanel = new JPanel();
         collectPanel.add(new JLabel("Step 4"));
 
+
         JPanel analysePanel = new JPanel();
         analysePanel.add(new JLabel("Step 5"));
+
+
 
         // Add panels to mainPanel with proper names
         mainPanel.add(profilePanel, "Profile");

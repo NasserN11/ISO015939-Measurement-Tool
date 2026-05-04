@@ -4,11 +4,15 @@ import GUI.DefinePanel;
 import GUI.MainFrame;
 import GUI.PlanPanel;
 import GUI.ProfilePanel;
+import data.ScenarioData;
+import model.Mode;
 import model.Scenario;
 import model.UserProfile;
 
+import javax.print.DocFlavor;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class WizardController {
 
@@ -24,12 +28,15 @@ public class WizardController {
     private DefinePanel definePanel;
     private PlanPanel planPanel;
 
+    ArrayList<Mode> allModes;
+
     // Constructor
     public WizardController(MainFrame mainFrame,CardLayout cardLayout,JPanel mainPanel) {
         this.mainFrame = mainFrame;
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.currentStep = 0;
+        allModes = ScenarioData.getAllModes();
     }
 
 
@@ -45,6 +52,17 @@ public class WizardController {
                 return;
             }
             profilePanel.saveToController(this);
+        }
+
+        if (currentStep == 1 && definePanel != null) {
+            if (!definePanel.isDataValid()) {
+                JOptionPane.showMessageDialog(mainFrame,
+                        "Please select a scenario before continuing",
+                        "Validation Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            definePanel.saveToController(this);
         }
 
         if (currentStep < 4) {
@@ -66,9 +84,8 @@ public class WizardController {
         userProfile = new UserProfile(username, school, sessionName);
     }
 
-    public void saveSelection(String mode, Scenario scenario) {
-        this.selectedMode = mode;
-        this.selectedScenario = scenario;
+    public void saveSelection(String scenario) {
+        this.selectedScenario = findScenarioByName(scenario);
     }
 
     public Scenario getCurrentScenario() {
@@ -83,7 +100,11 @@ public class WizardController {
         switch(currentStep) {
             case 0: cardLayout.show(mainPanel, "Profile"); break;
             case 1: cardLayout.show(mainPanel, "Define"); break;
-            case 2: cardLayout.show(mainPanel, "Plan"); break;
+            case 2:
+                if (planPanel != null && selectedScenario != null) {
+                    planPanel.setScenario(selectedScenario);
+                }
+                cardLayout.show(mainPanel, "Plan"); break;
             case 3: cardLayout.show(mainPanel, "Collect"); break;
             case 4: cardLayout.show(mainPanel, "Analyse"); break;
         }
@@ -96,4 +117,24 @@ public class WizardController {
     public void setDefinePanel(DefinePanel definePanel) { this.definePanel = definePanel; }
 
     public void setPlanPanel(PlanPanel planPanel) { this.planPanel = planPanel; }
+
+
+    // Helper Methods
+    public Scenario findScenarioByName(String scenarioString) {
+
+        Scenario scenario = null;
+
+        // Loop through all modes
+        for (Mode m : allModes) {
+            // For each Mode, loop through its Scenarios
+            for (Scenario s : m.getScenarios()) {
+                // If Scenario name matches, return that Scenario
+                if (scenarioString.equals(s.getName())) {
+                    scenario = s;
+                }
+            }
+        }
+
+        return scenario;
+    }
 }

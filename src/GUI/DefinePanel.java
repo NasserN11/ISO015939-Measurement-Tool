@@ -84,7 +84,8 @@ public class DefinePanel extends JPanel {
     public void saveToController(WizardController controller) {
         String mode = getSelectedMode();
         String scenario = getSelectedScenario();
-        //controller.saveSelection(mode, scenario);
+
+        controller.saveSelection(scenario);
     }
     private void updateScenario() {
 
@@ -114,6 +115,7 @@ public class DefinePanel extends JPanel {
 
     private String getSelectedScenario() {
         String selectedScenario = (String) scenarioCombo.getSelectedItem();
+
         return selectedScenario;
     }
 }
