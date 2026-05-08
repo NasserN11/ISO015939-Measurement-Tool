@@ -42,7 +42,7 @@ public class PlanPanel extends JPanel {
                                         d.getName() + " (Coefficient: " + d.getWeight() + ")",
                                         m.getName(),
                                         m.getWeight(),
-                                        m.getDirection().equals("Higher") ? "Higher is better" : "Lower is better",
+                                        m.getDirection().equals("higher") ? "Higher is better" : "Lower is better",
                                         m.getMinValue() + " - " + m.getMaxValue(),
                                         m.getUnit()
                 });
