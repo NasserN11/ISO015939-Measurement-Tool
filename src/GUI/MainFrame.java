@@ -51,8 +51,8 @@ public class MainFrame extends JFrame {
         controller.setPlanPanel(planPanel);
 
 
-        JPanel collectPanel = new JPanel();
-        collectPanel.add(new JLabel("Step 4"));
+        CollectPanel collectPanel = new CollectPanel();
+        controller.setCollectPanel(collectPanel);
 
 
         JPanel analysePanel = new JPanel();

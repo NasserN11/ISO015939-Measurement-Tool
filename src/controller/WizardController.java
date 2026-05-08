@@ -1,9 +1,6 @@
 package controller;
 
-import GUI.DefinePanel;
-import GUI.MainFrame;
-import GUI.PlanPanel;
-import GUI.ProfilePanel;
+import GUI.*;
 import data.ScenarioData;
 import model.Mode;
 import model.Scenario;
@@ -27,6 +24,7 @@ public class WizardController {
     private ProfilePanel profilePanel;
     private DefinePanel definePanel;
     private PlanPanel planPanel;
+    private CollectPanel collectPanel;
 
     ArrayList<Mode> allModes;
 
@@ -64,6 +62,13 @@ public class WizardController {
             }
             definePanel.saveToController(this);
         }
+
+        if (currentStep == 3 && collectPanel != null)  {
+            if (!collectPanel.isDataValid()) {
+                return;
+            }
+        }
+
 
         if (currentStep < 4) {
             currentStep++;
@@ -105,7 +110,9 @@ public class WizardController {
                     planPanel.setScenario(selectedScenario);
                 }
                 cardLayout.show(mainPanel, "Plan"); break;
-            case 3: cardLayout.show(mainPanel, "Collect"); break;
+            case 3:
+                collectPanel.setScenario(selectedScenario);
+                cardLayout.show(mainPanel, "Collect"); break;
             case 4: cardLayout.show(mainPanel, "Analyse"); break;
         }
     }
@@ -117,6 +124,8 @@ public class WizardController {
     public void setDefinePanel(DefinePanel definePanel) { this.definePanel = definePanel; }
 
     public void setPlanPanel(PlanPanel planPanel) { this.planPanel = planPanel; }
+
+    public void setCollectPanel(CollectPanel collectPanel) { this.collectPanel = collectPanel; }
 
 
     // Helper Methods
