@@ -29,10 +29,11 @@ public class Metric {
     public double getMinValue() { return minValue; }
     public double getMaxValue() { return maxValue; }
     public String getUnit() { return unit; }
+    public double getMeasuredValue() { return measuredValue; }
 
     // setters
-    public void setMeasuredValue() {
-        this.measuredValue = measuredValue;
+    public void setMeasuredValue(double value) {
+        this.measuredValue = value;
     }
 
     // Methods
