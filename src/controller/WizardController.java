@@ -25,6 +25,7 @@ public class WizardController {
     private DefinePanel definePanel;
     private PlanPanel planPanel;
     private CollectPanel collectPanel;
+    private AnalysePanel analysePanel;
 
     ArrayList<Mode> allModes;
 
@@ -102,6 +103,7 @@ public class WizardController {
     public int getCurrentStep() { return currentStep; }
 
     public void showCurrentStep() {
+        mainFrame.updateStepIndicator(currentStep);
         switch(currentStep) {
             case 0: cardLayout.show(mainPanel, "Profile"); break;
             case 1: cardLayout.show(mainPanel, "Define"); break;
@@ -110,10 +112,17 @@ public class WizardController {
                     planPanel.setScenario(selectedScenario);
                 }
                 cardLayout.show(mainPanel, "Plan"); break;
+
             case 3:
                 collectPanel.setScenario(selectedScenario);
                 cardLayout.show(mainPanel, "Collect"); break;
-            case 4: cardLayout.show(mainPanel, "Analyse"); break;
+
+            case 4:
+                if (analysePanel != null && selectedScenario != null)
+                    analysePanel.setScenario(selectedScenario);
+
+                cardLayout.show(mainPanel, "Analyse");
+                break;
         }
     }
 
@@ -126,6 +135,8 @@ public class WizardController {
     public void setPlanPanel(PlanPanel planPanel) { this.planPanel = planPanel; }
 
     public void setCollectPanel(CollectPanel collectPanel) { this.collectPanel = collectPanel; }
+
+    public void setAnalysePanel(AnalysePanel analysePanel) { this.analysePanel = analysePanel; }
 
 
     // Helper Methods

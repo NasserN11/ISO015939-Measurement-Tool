@@ -16,6 +16,7 @@ public class MainFrame extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private WizardController controller;
+    private JPanel stepIndicator;
 
     public MainFrame() {
         // Set up the window
@@ -29,6 +30,14 @@ public class MainFrame extends JFrame {
         setTitle("ISO 15939 Quality Measurement Tool");
         setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Create step indicator panel
+        stepIndicator = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        stepIndicator.setBackground(new Color(240, 240, 240));
+        add(stepIndicator, BorderLayout.NORTH);
+
+        // Initialize steps
+        updateStepIndicator(0);
 
         // Create CardLayout and the panel that holds all screens
         cardLayout = new CardLayout();
@@ -55,8 +64,8 @@ public class MainFrame extends JFrame {
         controller.setCollectPanel(collectPanel);
 
 
-        JPanel analysePanel = new JPanel();
-        analysePanel.add(new JLabel("Step 5"));
+        AnalysePanel analysePanel = new AnalysePanel();
+        controller.setAnalysePanel(analysePanel);
 
 
 
@@ -88,6 +97,40 @@ public class MainFrame extends JFrame {
 
         // Make the window visible
         setVisible(true);
+    }
+
+    public void updateStepIndicator(int currentStep) {
+        stepIndicator.removeAll();
+
+        String[] steps = {"Profile", "Define", "Plan", "Collect", "Analyse"};
+
+        for (int i = 0; i < steps.length; i++) {
+            JLabel stepLabel = new JLabel(steps[i]);
+
+            if (i == currentStep) {
+                stepLabel.setFont(new Font("Seoge UI", Font.BOLD, 14));
+                stepLabel.setForeground(new Color(60, 144, 255));
+            }
+
+            else if (i < currentStep) {
+                stepLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+                stepLabel.setForeground(new Color(52, 204, 66));
+                stepLabel.setText("● " + steps[i]);
+            }
+
+            stepIndicator.add(stepLabel);
+
+
+            // Add arrow between steps
+            if (i < steps.length - 1) {
+                JLabel arrow = new JLabel(("→"));
+                arrow.setForeground(Color.gray);
+                stepIndicator.add(arrow);
+            }
+
+            stepIndicator.revalidate();
+            stepIndicator.repaint();
+        }
     }
 
     public static void main(String[] args) {
